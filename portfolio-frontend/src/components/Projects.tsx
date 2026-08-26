@@ -54,7 +54,7 @@ export default function Projects() {
       id="projects"
       className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
     >
-      <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+      <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
         Projects
       </h2>
 
@@ -63,11 +63,11 @@ export default function Projects() {
           <article
             key={project.id}
             // hover:-translate-y-1 + shadow: 마우스를 올렸을 때 카드가 살짝 떠오르는 효과
-            className="group flex flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/[0.03] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/10"
+            className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/40"
           >
             {/* 프로젝트 미리보기 영역: 게임플레이 영상(videoUrl)이 있으면 영상을,
                 없으면 썸네일 이미지(imageUrl)를 보여줍니다. */}
-            <div className="relative aspect-video w-full overflow-hidden bg-foreground/5">
+            <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
               {project.videoUrl ? (
                 <video
                   src={project.videoUrl}
@@ -89,10 +89,10 @@ export default function Projects() {
             </div>
 
             <div className="flex flex-1 flex-col gap-4 p-6">
-              <h3 className="text-lg font-semibold text-foreground">
+              <h3 className="text-lg font-semibold text-slate-100">
                 {project.title}
               </h3>
-              <p className="flex-1 text-sm leading-relaxed text-foreground/70">
+              <p className="flex-1 text-sm leading-relaxed text-slate-400">
                 {project.description}
               </p>
 
@@ -101,20 +101,20 @@ export default function Projects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full border border-foreground/10 bg-background px-3 py-1 text-xs font-medium text-foreground/80"
+                    className="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-xs font-medium text-slate-400"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* 바로가기 버튼: GitHub는 항상 표시, 데모/기술문서는 있을 때만 표시 */}
+              {/* 바로가기 버튼: GitHub/기술문서는 아웃라인, 플레이 데모는 강조(파란색) 버튼 */}
               <div className="mt-2 flex flex-wrap gap-2">
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 min-w-[100px] rounded-full border border-foreground/20 px-4 py-2 text-center text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                  className="flex-1 min-w-[100px] rounded-full border border-slate-700 px-4 py-2 text-center text-sm font-semibold text-slate-100 transition-colors hover:bg-slate-700"
                 >
                   GitHub
                 </a>
@@ -123,7 +123,7 @@ export default function Projects() {
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 min-w-[100px] rounded-full bg-foreground px-4 py-2 text-center text-sm font-semibold text-background transition-colors hover:opacity-90"
+                    className="flex-1 min-w-[100px] rounded-full bg-blue-600 px-4 py-2 text-center text-sm font-semibold text-slate-100 transition-colors hover:bg-blue-500"
                   >
                     플레이 데모
                   </a>
@@ -133,7 +133,7 @@ export default function Projects() {
                     href={project.docsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 min-w-[100px] rounded-full border border-foreground/20 px-4 py-2 text-center text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                    className="flex-1 min-w-[100px] rounded-full border border-slate-700 px-4 py-2 text-center text-sm font-semibold text-slate-100 transition-colors hover:bg-slate-700"
                   >
                     기술문서
                   </a>

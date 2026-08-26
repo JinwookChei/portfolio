@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     // fixed + backdrop-blur: 스크롤을 내려도 항상 상단에 고정되고,
     // 아래 콘텐츠가 반투명하게 비치는 블러 효과가 적용됩니다.
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/70 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-700 bg-slate-900/80 backdrop-blur-md">
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
         {/* 좌측: 이름/로고 영역 */}
         <a
@@ -44,7 +44,7 @@ export default function Navbar() {
             window.scrollTo({ top: 0, behavior: "smooth" });
             setIsMenuOpen(false);
           }}
-          className="text-lg font-semibold tracking-tight text-foreground"
+          className="text-lg font-semibold tracking-tight text-slate-100"
         >
           Dev Portfolio
         </a>
@@ -56,7 +56,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 onClick={(event) => handleLinkClick(event, link.href)}
-                className="text-foreground/80 transition-colors hover:text-foreground"
+                className="text-slate-400 transition-colors hover:text-slate-100"
               >
                 {link.label}
               </a>
@@ -75,17 +75,17 @@ export default function Navbar() {
           {/* 햄버거 아이콘 3줄을 상태에 따라 X자 모양으로 애니메이션 전환 */}
           <div className="flex h-4 w-5 flex-col justify-between">
             <span
-              className={`h-0.5 w-full bg-foreground transition-transform ${
+              className={`h-0.5 w-full bg-slate-100 transition-transform ${
                 isMenuOpen ? "translate-y-[7px] rotate-45" : ""
               }`}
             />
             <span
-              className={`h-0.5 w-full bg-foreground transition-opacity ${
+              className={`h-0.5 w-full bg-slate-100 transition-opacity ${
                 isMenuOpen ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`h-0.5 w-full bg-foreground transition-transform ${
+              className={`h-0.5 w-full bg-slate-100 transition-transform ${
                 isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
               }`}
             />
@@ -95,13 +95,13 @@ export default function Navbar() {
 
       {/* 모바일 전용 드롭다운 메뉴: isMenuOpen이 true일 때만 렌더링 */}
       {isMenuOpen && (
-        <ul className="flex flex-col gap-1 border-t border-foreground/10 bg-background/95 px-4 py-3 backdrop-blur-md sm:hidden">
+        <ul className="flex flex-col gap-1 border-t border-slate-700 bg-slate-900/95 px-4 py-3 backdrop-blur-md sm:hidden">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 onClick={(event) => handleLinkClick(event, link.href)}
-                className="block rounded-md px-2 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-foreground"
+                className="block rounded-md px-2 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
               >
                 {link.label}
               </a>

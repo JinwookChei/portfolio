@@ -6,20 +6,20 @@ export default function Contact() {
       id="contact"
       className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
     >
-      <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">
+      <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
         Contact
       </h2>
 
       <div className="mt-6 flex flex-col gap-4">
         {/* TODO: 이메일/GitHub 주소를 실제 정보로 교체하세요. */}
-        <p className="leading-relaxed text-foreground/70">
+        <p className="leading-relaxed text-slate-400">
           새로운 기회나 협업 제안은 언제나 환영합니다. 아래 이메일이나
           GitHub으로 편하게 연락해주세요.
         </p>
 
         <a
           href="mailto:your-email@example.com"
-          className="flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"
+          className="flex items-center gap-2 text-slate-400 transition-colors hover:text-slate-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export default function Contact() {
           href="https://github.com/your-username"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 text-foreground/80 transition-colors hover:text-foreground"
+          className="flex items-center gap-2 text-slate-400 transition-colors hover:text-slate-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

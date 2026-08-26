@@ -19,35 +19,17 @@ export default function Hero() {
     // 나머지 화면 전체를 채워서, 처음 페이지를 열었을 때 Hero가 꽉 차 보이도록 함
     <section
       id="hero"
-      className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl scroll-mt-16 flex-col items-center justify-center gap-6 px-4 text-center sm:px-6"
+      className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl scroll-mt-16 flex-col items-center justify-center gap-6 px-4 text-center sm:px-6"
     >
       {/* TODO: "OOO" 부분을 실제 이름으로 교체하세요. */}
-      <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-5xl">
+      <h1 className="text-3xl font-bold tracking-tight text-slate-100 sm:text-5xl">
         문제를 코드로 해결하는 개발자, <br className="sm:hidden" />
         OOO입니다
       </h1>
 
-      <p className="max-w-xl text-base leading-relaxed text-foreground/70 sm:text-lg">
+      <p className="max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
         사용자 경험과 안정적인 서비스 운영을 함께 고민하는 풀스택 개발자입니다.
       </p>
-
-      {/* 주요 액션 버튼 2개 */}
-      <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-        <a
-          href="#projects"
-          onClick={(event) => scrollToSection(event, "projects")}
-          className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background transition-colors hover:opacity-90 sm:text-base"
-        >
-          프로젝트 보러가기
-        </a>
-        <a
-          href="#contact"
-          onClick={(event) => scrollToSection(event, "contact")}
-          className="rounded-full border border-foreground/20 px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5 sm:text-base"
-        >
-          연락하기
-        </a>
-      </div>
 
       {/* GitHub, 이메일 등 외부 링크/아이콘 영역 */}
       {/* TODO: href의 GitHub 주소와 이메일 주소를 실제 정보로 교체하세요. */}
@@ -57,7 +39,7 @@ export default function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
-          className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +54,7 @@ export default function Hero() {
         <a
           href="mailto:your-email@example.com"
           aria-label="이메일 보내기"
-          className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-slate-800 hover:text-slate-100"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,6 +70,33 @@ export default function Hero() {
           </svg>
         </a>
       </div>
+
+      {/* 스크롤 유도 영역: "Scroll" 라벨 + 테두리 있는 원형 버튼 + 바운스 애니메이션을
+          함께 써서 다음 섹션이 있다는 걸 훨씬 눈에 띄게 알려줍니다.
+          absolute + bottom-6으로 Hero 섹션 하단 중앙에 고정 배치합니다. */}
+      <a
+        href="#projects"
+        onClick={(event) => scrollToSection(event, "projects")}
+        aria-label="프로젝트 보러가기"
+        className="group absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-slate-400 transition-colors hover:text-slate-100"
+      >
+        <span className="flex h-12 w-12 animate-bounce items-center justify-center rounded-full border border-slate-700 bg-slate-800 text-blue-400 shadow-lg shadow-black/30 transition-colors group-hover:border-blue-500">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-6 w-6"
+            aria-hidden="true"
+          >
+            <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+        <span className="text-xs font-medium uppercase tracking-widest">
+          Scroll
+        </span>
+      </a>
     </section>
   );
 }
