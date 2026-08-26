@@ -1,14 +1,17 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
-  // TODO: Projects 아래에 Contact 섹션을 추가합니다.
   return (
     <div>
       <Hero />
       <About />
       <Projects />
+      <Contact />
+      <Footer />
     </div>
   );
 }

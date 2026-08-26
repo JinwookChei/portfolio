@@ -1,48 +1,49 @@
 import Image from "next/image";
 
 // 프로젝트 하나를 표현하는 타입입니다.
-// 나중에 Spring Boot API에서 프로젝트 목록을 받아오게 되더라도
-// 응답 데이터를 이 타입 구조에 맞춰주면 아래 컴포넌트를 그대로 재사용할 수 있습니다.
 interface Project {
   id: string;
   title: string;
   description: string;
-  tags: string[];
+  tags: string[]; // 엔진/언어 태그 (예: Unity, Unreal Engine, C++, C#, Godot 등)
   githubUrl: string;
-  demoUrl?: string;
-  imageUrl: string;
+  demoUrl?: string; // 플레이 데모 / itch.io / Steam 등 실행 가능한 링크
+  docsUrl?: string; // 발표자료 / 기술 문서 링크
+  imageUrl: string; // 썸네일 이미지 (정적 이미지 또는 GIF)
+  videoUrl?: string; // 게임플레이 영상이 있다면 썸네일 대신 재생
 }
 
 // 임시(Mock) 프로젝트 데이터입니다.
-// TODO: 실제 프로젝트 정보와 스크린샷(imageUrl)으로 교체하세요.
-// (추후에는 이 배열 대신 src/lib/api/ 아래의 API 호출 함수로 데이터를 받아올 수 있습니다.)
+// TODO: 실제 프로젝트 정보, 스크린샷/GIF(imageUrl), 게임플레이 영상(videoUrl)으로 교체하세요.
 const PROJECTS: Project[] = [
   {
     id: "portfolio-website",
     title: "포트폴리오 웹사이트",
     description:
-      "Next.js App Router와 Tailwind CSS로 제작한 개인 포트폴리오 사이트입니다. 추후 Spring Boot API와 연동할 예정입니다.",
+      "Next.js App Router와 Tailwind CSS로 제작한 개인 포트폴리오 정적 웹사이트입니다.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     githubUrl: "https://github.com/your-username/portfolio-frontend",
     demoUrl: "https://your-portfolio.example.com",
     imageUrl: "/globe.svg",
   },
   {
-    id: "legacy-field-project-1",
-    title: "기존 분야 프로젝트 1",
+    id: "pixel-quest",
+    title: "Pixel Quest (2D 플랫포머)",
     description:
-      "웹 개발을 시작하기 전, 기존 전공/분야에서 진행했던 프로젝트입니다. 문제 해결 능력과 기본기를 다진 경험입니다.",
-    tags: ["C/C++", "Python"],
-    githubUrl: "https://github.com/your-username/legacy-project-1",
+      "Unity로 제작한 2D 플랫포머 게임입니다. 타일맵 기반 레벨 디자인과 캐릭터 물리·충돌 처리를 직접 구현했습니다.",
+    tags: ["Unity", "C#"],
+    githubUrl: "https://github.com/your-username/pixel-quest",
+    demoUrl: "https://your-username.itch.io/pixel-quest",
     imageUrl: "/file.svg",
   },
   {
-    id: "api-backend-service",
-    title: "API 백엔드 서비스",
+    id: "unreal-shooter-prototype",
+    title: "Unreal 슈터 프로토타입",
     description:
-      "Spring Boot 기반으로 설계한 RESTful API 백엔드 서비스입니다. 도메인 로직과 API 명세를 직접 설계했습니다.",
-    tags: ["Spring Boot", "Java", "RESTful API"],
-    githubUrl: "https://github.com/your-username/api-backend-service",
+      "Unreal Engine과 C++로 제작한 슈터 게임 프로토타입입니다. 무기 시스템과 기본적인 AI 적 로직을 설계했습니다.",
+    tags: ["Unreal Engine", "C++"],
+    githubUrl: "https://github.com/your-username/unreal-shooter-prototype",
+    docsUrl: "https://your-slides.example.com/unreal-shooter-prototype",
     imageUrl: "/window.svg",
   },
 ];
@@ -64,14 +65,27 @@ export default function Projects() {
             // hover:-translate-y-1 + shadow: 마우스를 올렸을 때 카드가 살짝 떠오르는 효과
             className="group flex flex-col overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/[0.03] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-foreground/10"
           >
-            {/* 프로젝트 대표 이미지 영역 */}
-            <div className="relative aspect-video w-full bg-foreground/5">
-              <Image
-                src={project.imageUrl}
-                alt={`${project.title} 썸네일`}
-                fill
-                className="object-contain p-10 dark:invert"
-              />
+            {/* 프로젝트 미리보기 영역: 게임플레이 영상(videoUrl)이 있으면 영상을,
+                없으면 썸네일 이미지(imageUrl)를 보여줍니다. */}
+            <div className="relative aspect-video w-full overflow-hidden bg-foreground/5">
+              {project.videoUrl ? (
+                <video
+                  src={project.videoUrl}
+                  poster={project.imageUrl}
+                  className="h-full w-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                />
+              ) : (
+                <Image
+                  src={project.imageUrl}
+                  alt={`${project.title} 썸네일`}
+                  fill
+                  className="object-contain p-10 dark:invert"
+                />
+              )}
             </div>
 
             <div className="flex flex-1 flex-col gap-4 p-6">
@@ -82,7 +96,7 @@ export default function Projects() {
                 {project.description}
               </p>
 
-              {/* 사용 기술 태그 */}
+              {/* 엔진/언어 등 사용 기술 태그 */}
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -94,13 +108,13 @@ export default function Projects() {
                 ))}
               </div>
 
-              {/* 바로가기 버튼: GitHub는 항상 표시, 데모 링크는 있을 때만 표시 */}
-              <div className="mt-2 flex gap-3">
+              {/* 바로가기 버튼: GitHub는 항상 표시, 데모/기술문서는 있을 때만 표시 */}
+              <div className="mt-2 flex flex-wrap gap-2">
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 rounded-full border border-foreground/20 px-4 py-2 text-center text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                  className="flex-1 min-w-[100px] rounded-full border border-foreground/20 px-4 py-2 text-center text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
                 >
                   GitHub
                 </a>
@@ -109,9 +123,19 @@ export default function Projects() {
                     href={project.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 rounded-full bg-foreground px-4 py-2 text-center text-sm font-semibold text-background transition-colors hover:opacity-90"
+                    className="flex-1 min-w-[100px] rounded-full bg-foreground px-4 py-2 text-center text-sm font-semibold text-background transition-colors hover:opacity-90"
                   >
-                    Demo
+                    플레이 데모
+                  </a>
+                )}
+                {project.docsUrl && (
+                  <a
+                    href={project.docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 min-w-[100px] rounded-full border border-foreground/20 px-4 py-2 text-center text-sm font-semibold text-foreground transition-colors hover:bg-foreground/5"
+                  >
+                    기술문서
                   </a>
                 )}
               </div>

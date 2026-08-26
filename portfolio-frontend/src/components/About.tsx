@@ -6,17 +6,16 @@
 // 추가/삭제하고 싶을 때 이 목록만 수정하면 됩니다.
 const SKILL_CATEGORIES = [
   {
-    title: "Frontend",
-    skills: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    title: "Engines & Tools",
+    skills: ["Unity", "Unreal Engine", "Git"],
   },
   {
-    title: "Backend",
-    skills: ["Spring Boot", "Java", "RESTful API"],
+    title: "Languages",
+    skills: ["C++", "C#", "Python", "TypeScript"],
   },
   {
-    title: "Other",
-    // 기존에 다뤄본 언어/도구를 자유롭게 추가하세요. (예: C/C++, Python 등)
-    skills: ["Git", "WSL/Linux", "C/C++", "Python"],
+    title: "Core & Graphics",
+    skills: ["DirectX", "OpenGL", "Shader/HLSL", "Data Structures"],
   },
 ];
 
@@ -37,12 +36,12 @@ export default function About() {
         {/* TODO: 아래 소개 문구를 본인의 실제 이야기로 교체하세요. */}
         <div className="mt-6 rounded-2xl border border-foreground/10 bg-foreground/[0.03] p-6 sm:p-8">
           <p className="leading-relaxed text-foreground/80">
-            처음에는 C/C++과 Python으로 알고리즘과 기본기를 다졌습니다.
-            이후 &ldquo;내가 만든 로직이 실제 사용자에게 어떻게 가닿는가&rdquo;에
-            대한 궁금증이 커지면서, 웹 풀스택 개발에 도전하게 되었습니다.
-            지금은 Next.js와 React로 프론트엔드를 구현하고, Spring Boot로
-            REST API 백엔드를 설계하며 하나의 서비스를 처음부터 끝까지
-            만들어보는 경험을 쌓아가고 있습니다.
+            어릴 때부터 좋아하던 게임을 &ldquo;직접 만들어보고 싶다&rdquo;는
+            마음으로 게임 프로그래밍을 시작했습니다. C++과 C#으로 게임
+            로직을 구현하고, Unity와 Unreal Engine 위에서 그래픽스·물리·
+            최적화 문제를 풀어가는 과정에 가장 큰 흥미를 느낍니다. 지금도
+            새로운 엔진 기능과 렌더링 기법을 배우며 완성도 높은 게임을
+            만드는 개발자로 성장해가고 있습니다.
           </p>
         </div>
       </section>
