@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,9 +22,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      // scroll-smooth: 앵커 링크(#about 등) 이동 시 부드럽게 스크롤되도록 설정
+      className={`${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <Navbar />
+        {/* pt-16: Navbar의 높이(h-16)만큼 여백을 주어 콘텐츠가 가려지지 않도록 함 */}
+        <div className="flex flex-1 flex-col pt-16">{children}</div>
+      </body>
     </html>
   );
 }
