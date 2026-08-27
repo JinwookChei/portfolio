@@ -7,6 +7,7 @@ import { useState } from "react";
 // 동일한 id를 가진 요소(예: <section id="about">)로 만들어주면 됩니다.
 const NAV_LINKS = [
   { label: "About", href: "#about" },
+  { label: "Timeline", href: "#timeline" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },

@@ -46,6 +46,16 @@ const PROJECTS: Project[] = [
     docsUrl: "https://your-slides.example.com/unreal-shooter-prototype",
     imageUrl: "/window.svg",
   },
+  {
+    id: "godot-puzzle-game",
+    title: "Godot 퍼즐 게임",
+    description:
+      "Godot 엔진으로 제작한 퍼즐 게임입니다. 그리드 기반 로직과 레벨 데이터 직렬화를 직접 설계했습니다.",
+    tags: ["Godot", "GDScript"],
+    githubUrl: "https://github.com/your-username/godot-puzzle-game",
+    demoUrl: "https://your-username.itch.io/godot-puzzle-game",
+    imageUrl: "/globe.svg",
+  },
 ];
 
 export default function Projects() {
@@ -58,7 +68,8 @@ export default function Projects() {
         Projects
       </h2>
 
-      <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* 2 x 2 고정 그리드: 모바일 1열 -> sm 이상에서는 항상 2열로 4칸을 채움 */}
+      <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {PROJECTS.map((project) => (
           <article
             key={project.id}

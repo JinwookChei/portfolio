@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Timeline from "./Timeline";
 
 // About + Skills 섹션: 자기소개와 기술 스택을 함께 보여주는 컴포넌트입니다.
 // Navbar의 "About"과 "Skills" 메뉴가 각각 id="about", id="skills"로 스크롤 이동하므로,
@@ -58,6 +59,9 @@ export default function About() {
           </p>
         </div>
       </section>
+
+      {/* ---------- Timeline: About과 Skills 사이에 배치되는 연혁 ---------- */}
+      <Timeline />
 
       {/* ---------- Skills: 기술 스택 태그 ---------- */}
       <section
