@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import ProjectModal from "./ProjectModal";
 
 // 프로젝트 하나를 표현하는 타입입니다.
 interface Project {
@@ -11,6 +15,12 @@ interface Project {
   docsUrl?: string; // 발표자료 / 기술 문서 링크
   imageUrl: string; // 썸네일 이미지 (정적 이미지 또는 GIF)
   videoUrl?: string; // 게임플레이 영상이 있다면 썸네일 대신 재생
+  // 상세 모달에서 스크롤로 넘겨볼 이미지 목록입니다.
+  // PDF/PPT 발표자료가 있다면, 파일을 그대로 넣지 말고 각 페이지를 이미지(png/jpg)로
+  // 변환한 뒤 이 배열에 순서대로 추가하세요.
+  // 예) poppler-utils가 설치되어 있다면: pdftoppm -png docs.pdf public/projects/my-project/slide
+  //     -> public/projects/my-project/slide-1.png, slide-2.png, ... 형태로 생성됨
+  images: string[];
 }
 
 // 임시(Mock) 프로젝트 데이터입니다.
@@ -25,6 +35,11 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/your-username/portfolio-frontend",
     demoUrl: "https://your-portfolio.example.com",
     imageUrl: "/globe.svg",
+    images: [
+      "/projects/portfolio-website/7.jpg",
+      "/projects/portfolio-website/8.jpg",
+      "/projects/portfolio-website/9.jpg",
+    ],
   },
   {
     id: "pixel-quest",
@@ -35,6 +50,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/your-username/pixel-quest",
     demoUrl: "https://your-username.itch.io/pixel-quest",
     imageUrl: "/file.svg",
+    images: ["/file.svg", "/globe.svg", "/window.svg"],
   },
   {
     id: "unreal-shooter-prototype",
@@ -45,6 +61,7 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/your-username/unreal-shooter-prototype",
     docsUrl: "https://your-slides.example.com/unreal-shooter-prototype",
     imageUrl: "/window.svg",
+    images: ["/window.svg", "/file.svg", "/globe.svg"],
   },
   {
     id: "godot-puzzle-game",
@@ -55,14 +72,20 @@ const PROJECTS: Project[] = [
     githubUrl: "https://github.com/your-username/godot-puzzle-game",
     demoUrl: "https://your-username.itch.io/godot-puzzle-game",
     imageUrl: "/globe.svg",
+    images: ["/globe.svg", "/window.svg", "/file.svg"],
   },
 ];
 
 export default function Projects() {
+  // 클릭한 프로젝트를 담아두는 상태입니다. null이면 모달이 닫힌 상태입니다.
+  const [selectedProject, setSelectedProject] = useState<Project | null>(
+    null
+  );
+
   return (
     <section
       id="projects"
-      className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
+      className="mx-auto max-w-6xl scroll-mt-16 px-4 py-20 sm:px-6"
     >
       <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
         Projects
@@ -76,37 +99,47 @@ export default function Projects() {
             // hover:-translate-y-1 + shadow: 마우스를 올렸을 때 카드가 살짝 떠오르는 효과
             className="group flex flex-col overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/40"
           >
-            {/* 프로젝트 미리보기 영역: 게임플레이 영상(videoUrl)이 있으면 영상을,
-                없으면 썸네일 이미지(imageUrl)를 보여줍니다. */}
-            <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
-              {project.videoUrl ? (
-                <video
-                  src={project.videoUrl}
-                  poster={project.imageUrl}
-                  className="h-full w-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-              ) : (
-                <Image
-                  src={project.imageUrl}
-                  alt={`${project.title} 썸네일`}
-                  fill
-                  className="object-contain p-10 dark:invert"
-                />
-              )}
-            </div>
+            {/* 썸네일/제목/설명을 누르면 상세 모달이 열립니다 */}
+            <button
+              type="button"
+              onClick={() => setSelectedProject(project)}
+              aria-label={`${project.title} 상세보기`}
+              className="flex flex-1 flex-col text-left"
+            >
+              {/* 프로젝트 미리보기 영역: 게임플레이 영상(videoUrl)이 있으면 영상을,
+                  없으면 썸네일 이미지(imageUrl)를 보여줍니다. */}
+              <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
+                {project.videoUrl ? (
+                  <video
+                    src={project.videoUrl}
+                    poster={project.imageUrl}
+                    className="h-full w-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                ) : (
+                  <Image
+                    src={project.imageUrl}
+                    alt={`${project.title} 썸네일`}
+                    fill
+                    className="object-contain p-10 dark:invert"
+                  />
+                )}
+              </div>
 
-            <div className="flex flex-1 flex-col gap-4 p-6">
-              <h3 className="text-lg font-semibold text-slate-100">
-                {project.title}
-              </h3>
-              <p className="flex-1 text-sm leading-relaxed text-slate-400">
-                {project.description}
-              </p>
+              <div className="flex flex-1 flex-col gap-4 p-6 pb-0">
+                <h3 className="text-lg font-semibold text-slate-100">
+                  {project.title}
+                </h3>
+                <p className="flex-1 text-sm leading-relaxed text-slate-400">
+                  {project.description}
+                </p>
+              </div>
+            </button>
 
+            <div className="flex flex-col gap-4 p-6 pt-4">
               {/* 엔진/언어 등 사용 기술 태그 */}
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -154,6 +187,15 @@ export default function Projects() {
           </article>
         ))}
       </div>
+
+      {/* 프로젝트를 클릭했을 때만 상세 모달을 렌더링합니다 */}
+      {selectedProject && (
+        <ProjectModal
+          title={selectedProject.title}
+          images={selectedProject.images}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   );
 }

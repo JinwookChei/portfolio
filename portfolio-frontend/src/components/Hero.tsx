@@ -19,7 +19,7 @@ export default function Hero() {
     // 나머지 화면 전체를 채워서, 처음 페이지를 열었을 때 Hero가 꽉 차 보이도록 함
     <section
       id="hero"
-      className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl scroll-mt-16 flex-col items-center justify-center gap-6 px-4 text-center sm:px-6"
+      className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl scroll-mt-16 flex-col items-center justify-center gap-6 px-4 text-center sm:px-6"
     >
       {/* TODO: "OOO" 부분을 실제 이름으로 교체하세요. */}
       <h1 className="text-3xl font-bold tracking-tight text-slate-100 sm:text-5xl">

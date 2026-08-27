@@ -8,7 +8,7 @@ import Contact from "./Contact";
 import Footer from "./Footer";
 
 // Hero에서 About으로 스크롤하는 동안, 화면 전체 폭이었던 다크 블루 배경 패널을
-// About 콘텐츠 폭(max-w-5xl)까지 서서히 좁힙니다. About 지점을 지나고 나면
+// About 콘텐츠 폭(max-w-6xl)까지 서서히 좁힙니다. About 지점을 지나고 나면
 // 진행률이 1로 고정되어, 좁아진 폭 그대로 Projects/Contact/Footer를 지나
 // 페이지 맨 아래까지 계속 유지됩니다.
 export default function PageScrollBackground() {
@@ -35,7 +35,7 @@ export default function PageScrollBackground() {
       // 지나가도록 완만한 곡선을 그려서 훨씬 자연스럽게 좁아지도록 만듭니다.
       const progress = linear * linear * (3 - 2 * linear);
 
-      // 시작 너비: Hero처럼 화면 전체 폭 / 끝 너비: About 콘텐츠 실제 렌더링 폭(max-w-5xl)에
+      // 시작 너비: Hero처럼 화면 전체 폭 / 끝 너비: About 콘텐츠 실제 렌더링 폭(max-w-6xl)에
       // 여유 폭(EXTRA_WIDTH)을 더해, 콘텐츠보다 배경이 살짝 더 넓게 보이도록 합니다.
       const EXTRA_WIDTH = 64;
       const fullWidth = wrapper.getBoundingClientRect().width;

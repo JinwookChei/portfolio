@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
+      className="mx-auto max-w-6xl scroll-mt-16 px-4 py-20 sm:px-6"
     >
       <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
         Contact

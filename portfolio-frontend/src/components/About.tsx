@@ -29,7 +29,7 @@ export default function About() {
       {/* scroll-mt-16: 고정된 Navbar(h-16)에 제목이 가려지지 않도록 스크롤 여백 확보 */}
       <section
         id="about"
-        className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
+        className="mx-auto max-w-6xl scroll-mt-16 px-4 py-20 sm:px-6"
       >
         <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
           About
@@ -66,7 +66,7 @@ export default function About() {
       {/* ---------- Skills: 기술 스택 태그 ---------- */}
       <section
         id="skills"
-        className="mx-auto max-w-5xl scroll-mt-16 px-4 py-20 sm:px-6"
+        className="mx-auto max-w-6xl scroll-mt-16 px-4 py-20 sm:px-6"
       >
         <h2 className="text-2xl font-semibold text-slate-100 sm:text-3xl">
           Skills

@@ -36,7 +36,7 @@ export default function Navbar() {
     // fixed + backdrop-blur: 스크롤을 내려도 항상 상단에 고정되고,
     // 아래 콘텐츠가 반투명하게 비치는 블러 효과가 적용됩니다.
     <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-700 bg-slate-900/80 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         {/* 좌측: 이름/로고 영역 */}
         <a
           href="#"
